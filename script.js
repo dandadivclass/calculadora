@@ -164,4 +164,4 @@ input.addEventListener('keydown', function(event) {
     else if (key === 'Escape' || key.toLowerCase() === 'c') {
         apagarNumerosCampo();
     }
-  });
+});

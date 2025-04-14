@@ -1,0 +1,43 @@
+<!-- body onde só o teclado fisico funciona -->
+
+<body>
+    <div class="calculadora-container-principal">
+        <div class="calculadora-card">
+            <input type="text" id="campo-numeros">
+            <div class="calculadora-card-botoes">
+                <button onclick="apagarNumerosCampo()">C</button>
+                <button onclick="voltarNumeroCampo()">D</button>
+                <button>/</button>
+                <button>*</button>
+                <button>7</button>
+                <button>8</button>
+                <button>9</button>
+                <button>-</button>
+                <button>4</button>
+                <button>5</button>
+                <button>6</button>
+                <button>+</button>
+                <button>1</button>
+                <button>2</button>
+                <button>3</button>
+                <button class="botao-zero numeros">0</button>
+                <button>.</button>
+                <button class="botao-igual">=</button>
+            </div>
+        </div>
+    </div>
+</body>
+</html>
+
+
+
+<!-- inputValor.addEventListener('keypress', function (event) {
+    const key = event.key;
+    const code = event.keyCode;
+    console.log(`Key: ${key}, Code ${code}`);
+
+    if((event.key >= 'a' && event.key <= 'z') || (event.key >= 'A' && event.key <= 'Z')) {
+        event.preventDefault();
+        console.log('Digite apenas números');
+    }
+}); -->
