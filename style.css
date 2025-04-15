@@ -40,6 +40,9 @@ h1 {
     padding-right: 8px;
     font-size: 17px;
 }
+    .campo-numeros-erro {
+        border-color: red !important;
+    }
 
 .calculadora-card-botoes {
     display: grid;
