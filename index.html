@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="style.css">
+    <script src="script.js" defer></script>
+    <title>Calculadora</title>
+</head>
+<body>
+    <div class="calculadora-container-principal">
+        <div class="calculadora-card">
+            <input type="text" id="campo-numeros">
+            <div class="calculadora-card-botoes">
+                <button onclick="apagarNumerosCampo()">C</button>
+                <button onclick="voltarNumeroCampo()">D</button>
+                <button onclick="inserirNumeroCampo('/')" class="operador-botao">/</button>
+                <button onclick="inserirNumeroCampo('*')" class="operador-botao">*</button>
+                <button class="botoes-numeros">7</button>
+                <button class="botoes-numeros">8</button>
+                <button class="botoes-numeros">9</button>
+                <button onclick="inserirNumeroCampo('-')" class="operador-botao">-</button>
+                <button class="botoes-numeros">4</button>
+                <button class="botoes-numeros">5</button>
+                <button class="botoes-numeros">6</button>
+                <button onclick="inserirNumeroCampo('+')" class="operador-botao">+</button>
+                <button class="botoes-numeros">1</button>
+                <button class="botoes-numeros">2</button>
+                <button class="botoes-numeros">3</button>
+                <button class="botao-zero numeros botoes-numeros">0</button>
+                <button class="botao-ponto">.</button>
+                <button class="botao-igual" onclick="calcular()">=</button>
+            </div>
+        </div>
+    </div>
+</body>
+</html>
