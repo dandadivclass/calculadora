@@ -1,40 +1,50 @@
 const input = document.querySelector('#campo-numeros');
 const operadores = ['+', '-', '*', '/', '='];
 
+function removerErroVisual() {
+    input.classList.remove('campo-numeros-erro');
+}
+
 function inserirNumeroCampo(valorBotao) {
+    removerErroVisual();
     input.value += valorBotao;
 }
 
 function apagarNumerosCampo() {
+    removerErroVisual();
     input.value = '';
 }
 
 function voltarNumeroCampo() {
+    removerErroVisual();
     input.value = input.value.slice(0, -1);
 }
 
+
+removerErroVisual();
 function limitarEntrada() {
     const valorAtual = input.value;
     const ultimoValorInput = valorAtual.charAt(valorAtual.length - 1);
-
     const unicode = ultimoValorInput.charCodeAt(0);
 
-    if (!(unicode >= 48 && unicode <= 57) && 
-        unicode !== 42 && 
-        unicode !== 43 && 
-        unicode !== 45 && 
+
+    if (!(unicode >= 48 && unicode <= 57) &&
+        unicode !== 42 &&
+        unicode !== 43 &&
+        unicode !== 45 &&
         unicode !== 47 &&
         unicode !== 61 &&
         unicode !== 46) {
         input.value = valorAtual.slice(0, -1);
         console.log('Apenas números e os operadores.');
-        // input.placeholder = 'Apenas números e os operadores.';
+        input.classList.add('campo-numeros-erro');  
         return;
     }
 
     if (valorAtual.length === 1 && operadores.includes(ultimoValorInput)) {
         input.value = '';
         console.log('O operador não pode vir primeiro');
+        input.classList.add('campo-numeros-erro');  
         return;
     }
 
@@ -49,6 +59,7 @@ function limitarEntrada() {
     if (contadorOperadores > 1 && operadores.includes(ultimoValorInput)) {
         input.value = valorAtual.slice(0, -1);
         console.log('Apenas uma operação por vez');
+        input.classList.add('campo-numeros-erro');  
     }
 }
 
@@ -61,6 +72,7 @@ let operador = null;
 let calculoFinalizado = false;
 
 function adicionarNumero(numero) {
+    removerErroVisual();
     if (calculoFinalizado) {
         input.value = '';
         calculoFinalizado = false;
@@ -70,6 +82,7 @@ function adicionarNumero(numero) {
 }
 
 function selecionarOperador(op) {
+    removerErroVisual();
     if (input.value === '') return;
 
     primeiroNumero = parseFloat(input.value);
@@ -79,6 +92,7 @@ function selecionarOperador(op) {
 }
 
 function calcular() {
+    removerErroVisual();
     if (primeiroNumero === null || operador === null) return;
 
     const partes = input.value.split(operador);
@@ -114,6 +128,17 @@ function calcular() {
     calculoFinalizado = true;
 }
 
+function adicionarCaractere(caractere) {
+    removerErroVisual();
+    if (caractere === '.') {
+        if (input.value.includes('.')) {
+            return;
+        }
+    }
+    input.value += caractere;
+}
+
+document.querySelector('.botao-ponto').addEventListener('click', () => adicionarCaractere('.'));
 
 botoesNumeros.forEach(botao => {
     botao.addEventListener('click', () => {
@@ -141,8 +166,9 @@ input.addEventListener('input', function () {
 input.addEventListener('keydown', function(event) {
     const key = event.key;
 
+    removerErroVisual(); 
 
-    if (['+', '-', '*', '/'].includes(key)) {
+    if (operadores.includes(key)) {
         selecionarOperador(key);
     }
 
@@ -163,5 +189,13 @@ input.addEventListener('keydown', function(event) {
 
     else if (key === 'Escape' || key.toLowerCase() === 'c') {
         apagarNumerosCampo();
+    }else if (!isNaN(parseInt(key))) { 
+        if (input.value === 'Erro: Divisão por zero' || calculoFinalizado) {
+            input.value = '';
+            calculoFinalizado = false;
+        }
+        input.value + key;
+        limitarEntrada();
     }
 });
+
