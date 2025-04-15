@@ -1,6 +1,7 @@
 const input = document.querySelector('#campo-numeros');
 const operadores = ['+', '-', '*', '/', '='];
 
+
 function inserirNumeroCampo(valorBotao) {
     input.value += valorBotao;
 }
@@ -16,19 +17,18 @@ function voltarNumeroCampo() {
 function limitarEntrada() {
     const valorAtual = input.value;
     const ultimoValorInput = valorAtual.charAt(valorAtual.length - 1);
-
     const unicode = ultimoValorInput.charCodeAt(0);
 
-    if (!(unicode >= 48 && unicode <= 57) && 
-        unicode !== 42 && 
-        unicode !== 43 && 
-        unicode !== 45 && 
+
+    if (!(unicode >= 48 && unicode <= 57) &&
+        unicode !== 42 &&
+        unicode !== 43 &&
+        unicode !== 45 &&
         unicode !== 47 &&
         unicode !== 61 &&
         unicode !== 46) {
         input.value = valorAtual.slice(0, -1);
         console.log('Apenas números e os operadores.');
-        // input.placeholder = 'Apenas números e os operadores.';
         return;
     }
 
@@ -62,11 +62,12 @@ let calculoFinalizado = false;
 
 function adicionarNumero(numero) {
     if (calculoFinalizado) {
-        input.value = '';
+        input.value = numero;
         calculoFinalizado = false;
+    } else {
+        input.value += numero;
     }
-
-    input.value += numero;
+    limitarEntrada();
 }
 
 function selecionarOperador(op) {
@@ -114,6 +115,21 @@ function calcular() {
     calculoFinalizado = true;
 }
 
+function adicionarCaractere(caractere) {
+    if (caractere === '.') {
+        if (calculoFinalizado) {
+            input.value += '.'; 
+            calculoFinalizado = false;
+            return;
+        }
+        if (input.value.includes('.')) {
+            return;
+        }
+    }
+    input.value += caractere;
+}
+
+document.querySelector('.botao-ponto').addEventListener('click', () => adicionarCaractere('.'));
 
 botoesNumeros.forEach(botao => {
     botao.addEventListener('click', () => {
@@ -142,7 +158,7 @@ input.addEventListener('keydown', function(event) {
     const key = event.key;
 
 
-    if (['+', '-', '*', '/'].includes(key)) {
+    if (operadores.includes(key)) {
         selecionarOperador(key);
     }
 
@@ -163,5 +179,13 @@ input.addEventListener('keydown', function(event) {
 
     else if (key === 'Escape' || key.toLowerCase() === 'c') {
         apagarNumerosCampo();
+    }else if (!isNaN(parseInt(key))) { 
+        if (input.value === 'Erro: Divisão por zero' || calculoFinalizado) {
+            input.value = '';
+            calculoFinalizado = false;
+        }
+        input.value + key;
+        limitarEntrada();
     }
 });
+
