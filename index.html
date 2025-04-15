@@ -10,7 +10,7 @@
 <body>
     <div class="calculadora-container-principal">
         <div class="calculadora-card">
-            <input type="text" id="campo-numeros">
+            <input type="text" id="campo-numeros" class="campo-numeros-erro">
             <div class="calculadora-card-botoes">
                 <button onclick="apagarNumerosCampo()">C</button>
                 <button onclick="voltarNumeroCampo()">D</button>
@@ -28,7 +28,7 @@
                 <button class="botoes-numeros">2</button>
                 <button class="botoes-numeros">3</button>
                 <button class="botao-zero numeros botoes-numeros">0</button>
-                <button>.</button>
+                <button class="botao-ponto">.</button>
                 <button class="botao-igual" onclick="calcular()">=</button>
             </div>
         </div>
